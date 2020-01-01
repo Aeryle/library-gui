@@ -1,0 +1,61 @@
+{
+  "name": "lib-steam-custom-ui",
+  "version": "1.0.0",
+  "description": "Easily customize your Library in some clicks!",
+  "private": true,
+  "main": "output/src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy": "cp -a src/index.html output/src; cp -a src/css output/src/",
+    "compile": "rm -rf output; mkdir output; tsc -p tsconfig.json; npm run copy; webpack",
+    "prod:pack": "electron-builder -wl",
+    "start": "electron ."
+  },
+  "build": {
+    "files": [
+      "output/src/**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "common-tags": "^1.8.0",
+    "safe-regex": "^2.1.1",
+    "typescript": "^3.7.4"
+  },
+  "devDependencies": {
+    "@types/common-tags": "^1.8.0",
+    "@types/node": "^13.1.1",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
+    "electron": "^7.1.7",
+    "electron-builder": "^21.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-marine": "^5.3.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}

@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap');
+
+* {
+  color: #CECECE;
+  font-family: Ubuntu, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+h1 {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#parser > div {
+  margin-bottom: 20px;
+}
+
+#parser span:first-child,
+#parser span:nth-child(2) {
+  float: left;
+  text-align: left;
+}
+
+#parser span:first-child {
+  width: 300px;
+}
+
+#parser span:last-child {
+  width: available;
+  text-align: right;
+  display: block;
+}
+
+input {
+  color: #7F7F7F;
+  font-weight: bold;
+}
+
+#save {
+  margin: auto;
+  display: block;
+  color: white;
+  background-color: #354F88;
+  border: 1px #767676 solid;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  border-radius: 1em;
+  width: 200px;
+  height: 60px;
+}

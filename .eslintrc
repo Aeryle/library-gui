@@ -1,0 +1,22 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "eol-last": "off",
+    "newline-per-chained-call": [
+      "warn",
+      {
+        "ignoreChainWithDepth": 1
+      }
+    ]
+  },
+  "extends": [
+    "marine/node"
+  ]
+}
