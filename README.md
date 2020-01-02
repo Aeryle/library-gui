@@ -19,8 +19,14 @@
 * I will give a convenient way to compile & test code, for now, just follow the instructions
 
 ### Build from source
-* `npm run compile` or `yarn compile` - Compile the TS code to JS
-* `npm start` or `yarn start` - Execute the Electron APP
+##### Windows Users
+* `npm run win:compile` or `yarn win:compile` - Compile and setup everything
+
+##### Linux users
+* `npm run compile` or `yarn compile` - Same as for windows
+
+#### Start application
+`npm start` or `yarn start`
 
 **Please, can someone try `electron-builder -wl` on a Windows machine and tell me the result?**
 

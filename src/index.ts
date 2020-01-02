@@ -32,7 +32,8 @@ const createWindow = async () => {
 	let steamPath;
 
 	if (process.platform === 'win32') {
-		const { stdout } = await child('reg query HKEY_CURRENT_USER\\Software\\Valve\\Steam /v SteamPath /t REG_SZ');
+		const { stdout } = await child('reg query HKEY_CURRENT_USER\\Software\\Valve\\Steam /v SteamPath /t REG_SZ')
+			.catch(() => Object({ stdout: 'Steam is not installed' }));
 
 		steamPath = join(stdout, '');
 	} else {
@@ -41,11 +42,15 @@ const createWindow = async () => {
 			: join(`/home/${process.env.USER}/.local/share/Steam`, '');
 	}
 
+	if (steamPath === 'Steam is not installed') {
+		return win.loadURL(`file://${join(__dirname, 'install.html')}`);
+	}
+
 	// Load HTML file to show and pass some variables
 	// @ts-ignore
 	global.steamPath = steamPath;
 
-	win.loadFile(join(__dirname, 'index.html'))
+	win.loadURL(`file://${join(__dirname, 'index.html')}`)
 		.catch(console.error);
 };
 
