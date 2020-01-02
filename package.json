@@ -11,7 +11,7 @@
     "win:move": "move build\\src\\index.js build & rd /S /Q build\\src",
     "compile": "rm -rf build; tsc -p tsconfig.json; npm run copy; webpack; npm run move",
     "win:compile": "rd /S /Q build & tsc -p tsconfig.json & npm run win:copy & webpack & npm run win:move",
-    "prod:pack": "electron-builder -w",
+    "prod:pack": "electron-builder -wl",
     "start": "electron ."
   },
   "build": {
@@ -31,7 +31,6 @@
       "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
     ],
     "win": {
-      "asar": false,
       "target": [
         {
           "target": "portable",

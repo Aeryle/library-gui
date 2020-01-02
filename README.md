@@ -16,7 +16,6 @@
 
 ## Developpers
 * Pull Requests are welcome, don't hesitate
-* I will give a convenient way to compile & test code, for now, just follow the instructions
 
 ### Build from source
 ##### Windows Users
