@@ -17,7 +17,8 @@
 ## Developpers
 * Pull Requests are welcome, don't hesitate
 
-### Build from source
+## Build from source
+* `npm install` or `yarn` - Install all needed dependencies
 ##### Windows Users
 * `npm run win:compile` or `yarn win:compile` - Compile and setup everything
 
