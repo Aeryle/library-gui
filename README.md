@@ -27,7 +27,5 @@
 #### Start application
 `npm start` or `yarn start`
 
-**Please, can someone try `electron-builder -wl` on a Windows machine and tell me the result?**
-
 **OPTIONAL** You can pack the APP in Windows, Linux & Darwin applications [MacOS is not supported yet inside the Customizer]
 * `npm run prod:pack` or `yarn prod:pack`
