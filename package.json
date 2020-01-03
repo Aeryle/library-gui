@@ -5,11 +5,11 @@
   "private": true,
   "main": "build/index.js",
   "scripts": {
-    "win:copy": "copy /Y src\\*.html build & mkdir build\\css & copy /L /Y src\\css build\\css\\",
     "copy": "cp -a src/*.html build; cp -a src/css build",
+    "win:copy": "copy /Y src\\*.html build & mkdir build\\css & copy /L /Y src\\css build\\css",
     "move": "mv build/src/index.js build; rm -rf build/src",
     "win:move": "move build\\src\\index.js build & rd /S /Q build\\src",
-    "compile": "rm -rf build; mkdir build; tsc -p tsconfig.json; npm run copy; webpack; npm run move",
+    "compile": "rm -rf build; tsc -p tsconfig.json; npm run copy; webpack; npm run move",
     "win:compile": "rd /S /Q build & mkdir build & tsc -p tsconfig.json & npm run win:copy & webpack & npm run win:move",
     "prod:pack": "electron-builder -wl",
     "start": "electron ."

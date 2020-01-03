@@ -33,18 +33,27 @@ const createWindow = async () => {
 
 	if (process.platform === 'win32') {
 		const { stdout } = await child('reg query HKEY_CURRENT_USER\\Software\\Valve\\Steam /v SteamPath /t REG_SZ')
-			.catch(() => Object({ stdout: 'Steam is not installed' }));
+			.catch(() => Object({ stdout: void (0) }));
 
-		steamPath = join(stdout, '');
+		steamPath = join(
+			stdout
+				.replace(
+					/HKEY_CURRENT_USER\\Software\\Valve\\Steam\r\n(\s|\t)+SteamPath(\s|\t)+REG_SZ(\s|\t)+/,
+					''
+				)
+				.replace(/\r\n|/g, '')
+				.replace(/[A-Z].+/, '')
+		);
 	} else {
 		steamPath = process.platform === 'darwin'
 			? 'Not yet supported'
 			: join(`/home/${process.env.USER}/.local/share/Steam`, '');
 	}
 
-	if (steamPath === 'Steam is not installed') {
+	if (typeof steamPath === 'undefined') {
 		return win.loadURL(`file://${join(__dirname, 'install.html')}`);
 	}
+
 
 	// Load HTML file to show and pass some variables
 	// @ts-ignore
@@ -52,6 +61,8 @@ const createWindow = async () => {
 
 	win.loadURL(`file://${join(__dirname, 'index.html')}`)
 		.catch(console.error);
+
+	win.webContents.openDevTools();
 };
 
 app.on('ready', createWindow);

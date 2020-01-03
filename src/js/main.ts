@@ -134,7 +134,6 @@ class Editor {
 						.forEach(
 							([property, value, comment]) => {
 								const regex = new RegExp(`(\\s*|\\t*)--(${property}):\\s*(${value[1]});?(\\s*(${comment}))?`);
-								console.log(comment, 'ok');
 
 								lines = lines.map(line => regex.test(line)
 									? line.replace(regex, `$1--${property}: ${value[0].toUpperCase()};${comment === '\u200B' ? '' : ` ${comment}`}`)
@@ -149,7 +148,8 @@ class Editor {
 							'css',
 							'config.css'
 						),
-						Buffer.from(lines.join('\n'))
+						Buffer.from(lines.join('\n')),
+						{ flag: 'w+' }
 					);
 
 					const button = document.getElementById('save') as HTMLButtonElement;
@@ -162,7 +162,7 @@ class Editor {
 
 					e.preventDefault();
 				} catch (error) {
-					console.error(error);
+					process.stdout.write(error, 'error');
 				}
 			});
 	}
@@ -170,4 +170,4 @@ class Editor {
 
 new Editor({ path: remote.getGlobal('steamPath') })
 	.start()
-	.catch(console.error);
+	.catch(e => process.stdout.write(e));
