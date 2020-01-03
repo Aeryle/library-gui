@@ -24,7 +24,7 @@ class Editor {
 		const file: string = await fs.readFile(
 			join(
 				this.path,
-				'css',
+				'steam',
 				'config.css'
 			)
 		)
