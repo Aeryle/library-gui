@@ -24,7 +24,6 @@ class Editor {
 		const file: string = await fs.readFile(
 			join(
 				this.path,
-				'steamui',
 				'css',
 				'config.css'
 			)
@@ -144,7 +143,6 @@ class Editor {
 					await fs.writeFile(
 						join(
 							this.path,
-							'steamui',
 							'css',
 							'config.css'
 						),
