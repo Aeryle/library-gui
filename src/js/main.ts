@@ -47,13 +47,11 @@ class Editor {
 				)
 			)
 				.value
-				// @ts-ignore
 				.join(' ')
 				.split(' ')
 				// @ts-ignore
 				.map((c: string) => String.fromCharCode(c))
 				.join('');
-
 
 		const parsed = this.parseProperties(file);
 
@@ -143,10 +141,10 @@ class Editor {
 					await fs.writeFile(
 						join(
 							this.path,
-							'css',
+							'steamui',
 							'config.css'
 						),
-						Buffer.from(lines.join('\n')),
+						lines.join('\n'),
 						{ flag: 'w+' }
 					);
 
@@ -160,7 +158,7 @@ class Editor {
 
 					e.preventDefault();
 				} catch (error) {
-					process.stdout.write(error, 'error');
+					process.stdout.write(error);
 				}
 			});
 	}
