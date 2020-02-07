@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "declarationMap": true,
+    "declaration": true,
+    "emitBOM": true,
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "outDir": "js",
+    "pretty": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "sourceMap": true,
+    "target": "es6",
+    "allowSyntheticDefaultImports": true
+  },
+  "files": [
+    "../src/main.ts",
+    "../src/js/classes/Parser.ts",
+    "../src/js/classes/Config.ts"
+  ],
+  "exclude": [
+    "./*",
+    "../node_modules"
+  ]
+}

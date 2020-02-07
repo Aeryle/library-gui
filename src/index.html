@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>Library GUI</title>
+
+	<!--suppress HtmlUnknownTarget -->
+	<link rel="stylesheet" href="css/spectrum.min.css" type="text/css">
+	<!--suppress HtmlUnknownTarget -->
+	<link rel="stylesheet" href="css/main.css" type="text/css">
+</head>
+<body class="dark">
+	<!-- HEADER -->
+	<nav class="navbar dark bg-dark">
+		<a href="index.html" class="dark navbar-brand">Library GUI</a>
+
+		<!-- LIST -->
+		<a href="#" class="dark nav-item nav-link nav-item-active">CliCSS <span class="sr-only">(current)</span></a>
+		<a href="pages/editor.html" class="nav/-item nav-link nav-item-active">Editor</a>
+	</nav>
+	<!-- END HEADER -->
+
+	<!-- BODY -->
+	<button id="save-changes" type="button">Save changes</button>
+	<!-- END BODY -->
+
+	<!-- SCRIPTS -->
+	<!--suppress JSValidateTypes -->
+	<script>
+		const { remote } = require('electron');
+
+		const path = require('path');
+		const vbsDirectory = path.join(path.dirname(remote.app.getPath('exe')), './resources/src/vbs');
+
+		// Setup jQuery
+		const $ = jQuery = require('jquery');
+
+		// Require bootstrap
+		require('bootstrap/dist/js/bootstrap.min');
+
+		require('./js/spectrum.min');
+
+		// noinspection JSUnresolvedFunction
+		const Parser = new (remote.getGlobal('Parser'))(vbsDirectory);
+
+		Parser
+						.start()
+						.then(result => {
+							result.forEach((v) => $('body').append(v));
+
+							$('.show-or-hide').on('click', function (e) {
+								$(`#${e.currentTarget.innerText.toLowerCase().replace(' (click)', '')}`).find('.pick').toggle();
+								e.preventDefault();
+							});
+
+							[ ...$('.pick').find('.color-picker') ].forEach(p => {
+								const _ = $(p);
+
+								_.spectrum({
+									color: _.prop('value'),
+									showAlpha: _.prop('value').startsWith('rgba'),
+									palette: [ _.prop('value') ],
+									showInput: true,
+									showPalette: true
+								});
+							});
+						})
+						.then(() => {
+							$('#save-changes').on('click', e => {
+								const parse = e => {
+									const input = e.find('input');
+
+									const checkColor = (v) => v.find('input').hasClass('color-picker');
+									const checkNumber = (v) => !/[^0-9]/.test(v);
+									const rangeNumber = (v, min, max) => v >= min && v <= max ? v : max;
+									const numberValue = () => {
+										return `${rangeNumber(
+														input.prop('value'),
+														input.prop('min'),
+														input.prop('max')
+										)}${input.attr('aria-details')}`;
+									};
+
+									const property = e.find('span:first').text();
+
+									const value = checkColor(e)
+													? input.prop('value')
+													: checkNumber(input.prop('value'))
+																	? numberValue()
+																	: input.prop('value') ||
+																	e.find('select option:selected').text().replace(/^\n(.+)\n$/, '$1');
+									const comments = e.find('span').length === 2
+													? ` /* ${e.find('span:last').text()} */`
+													: '';
+
+									return `${property}: ${value};${comments}`;
+								};
+
+								const categories = $('.category')
+												.toArray()
+												.map(category => [ category.id, $(category).find('.row').toArray()
+																.map(r => parse($(r))) ]);
+
+								Parser.writeFile(categories);
+								e.preventDefault();
+							});
+						})
+						.catch(console.error);
+	</script>
+	<!-- END SCRIPTS -->
+</body>
+</html>

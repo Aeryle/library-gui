@@ -1,0 +1,33 @@
+/* Distant fonts */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
+
+/* Local files */
+@import '~bootstrap';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import 'variables';
+
+*.dark {
+	font-family: Ubuntu, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+body.dark {
+	color: $primary-light;
+	background-color: #121212;
+}
+
+.navbar-brand.dark {
+	color: $secondary-dark;
+	font-family: 'Indie Flower', 'Helvetica Neue', Helvetica, sans-serif;
+	font-size: 30px;
+}
+
+.navbar > *,
+.navbar > *:hover {
+	color: $secondary-dark;
+}
+
+.pick {
+	display: none;
+}
