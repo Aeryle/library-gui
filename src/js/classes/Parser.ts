@@ -160,7 +160,7 @@ export default class Parser extends Config {
 						
 						<!-- Values, transform into a picker if needed -->
 						<input
-							class="col-sm-5 px-1 ${/^(#|rgba?)/.test(v.value) ? 'color-picker' : ''}"
+							class="col-sm-5 px-1 ${/^(#|rgba?|h[ls]v)/.test(v.value) ? 'color-picker' : ''}"
 							type="text"
 							value="${v.value.replace(/"/g, '&quot;')}">
 							

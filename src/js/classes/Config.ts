@@ -107,7 +107,7 @@ export default class Config {
 
 		return fs.readFile(
 			resolve(path, 'config.css'),
-			'r'
+			{ flag: 'r' }
 		)
 			.catch(async () => phin({
 				url: 'https://aikomidori.github.io/steam-library/config.css',
