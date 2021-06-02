@@ -1,3 +1,5 @@
+## This project is not dead, I had not yet time to work on it, I'm going back to it soon.
+
 # Library Customizer
 
 ## What is it?
